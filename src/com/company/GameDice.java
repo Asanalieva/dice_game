@@ -134,27 +134,28 @@ public class GameDice {
         } else {
             System.out.println("Computer win " + compFinalScore + " points more. Congratulations!");
         }
-
+        System.out.println("User's Final Points: "+ totalPoints(userResult)+ "| Computer's Final Result: " + totalPoints(computerResult));
 
     }
 
-    static void printFinalResult(){
-        System.out.println("-----------------Finish Game-----------------------\n"+
-                "Round  |     User  |        Computer \n"+
-                "-------+-----------+-----------------\n"+
-                "       | Predicted:"+userPredicate.get(0)+"| Predicted: "+ computerPredicate.get(0)+'\n'+
-                "  -1-  | Dice: "+userDice.get(0)+"     | Dice: "+computerDice.get(0)+'\n'+
-                "       | Result: "+userResult.get(0)+"  | Result: "+computerResult.get(0)+'\n'+
-                "-------+-----------+-----------------\n"+
-                "       | Predicted:"+userPredicate.get(1)+"| Predicted: "+ computerPredicate.get(1)+'\n'+
-                "  -2-  | Dice: "+userDice.get(1)+"     | Dice: "+computerDice.get(1)+'\n'+
-                "       | Result: "+userResult.get(1)+"  | Result: "+computerResult.get(1)+'\n'+
-                "-------+-----------+-----------------"+'\n'+
-                "       | Predicted:"+userPredicate.get(2)+"| Predicted: "+ computerPredicate.get(2)+'\n'+
-                "  -3-  | Dice: "+userDice.get(2)+"     | Dice: "+computerDice.get(2)+'\n'+
-                "       | Result: "+userResult.get(2)+"  | Result: "+computerResult.get(2)+'\n'+
-                "-------+-----------+-----------------\n"+
-                "       | Final points: "+ totalPoints(userResult)+ "| Final Result: " + totalPoints(computerResult));
+
+        static void printFinalResult(){
+            System.out.println("-----------------Finish Game-----------------------\n"+
+                    "Round  |     User       |        Computer ");
+            int counter = 0;
+            for(int i = 0;i<3;i++){
+                counter++;
+                System.out.printf("       | Predicted   %d  | Predicted  %d \n"+
+                            "- %d -  | Dice        %d  | Dice       %d \n"+
+                            "       | Result      %d | Result     %d \n"+
+                            " -------+-----------------+----------------\n",userPredicate.get(i),computerPredicate.get(i),
+                        counter,userDice.get(i),computerDice.get(i),userResult.get(i),computerResult.get(i));
+
+
+        }
+
+
+//                "       | Final points: "+ totalPoints(userResult)+ "| Final Result: " + totalPoints(computerResult));
 
 
         if(totalPoints(userResult) > totalPoints(computerResult)){
