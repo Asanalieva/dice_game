@@ -155,7 +155,6 @@ public class GameDice {
         }
 
 
-//                "       | Final points: "+ totalPoints(userResult)+ "| Final Result: " + totalPoints(computerResult));
 
 
         if(totalPoints(userResult) > totalPoints(computerResult)){
