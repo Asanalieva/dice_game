@@ -41,15 +41,39 @@ public class GameDice {
                 if(input < 2 | input > 12){
                     throw new InvalidNumberException("You entered invalid number " + input);
                 }
-                System.out.println("User rolls the dices...");
 
                 Dices1 dicesM = new Dices1();
                 int dices1 = rollTheDice();
                 int dices2 = rollTheDice();
+                int sum = dices1 + dices2;
+
+                //Cheating
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Do you want to cheat? [Y/N]");
+                System.out.println("If you fail, you will lost 10 points");
+                String decision = scanner.nextLine();
+                if(decision.equals("N")){
+                    System.out.println("User doesn't cheated");
+                }else if(decision.equals("Y")){
+                    System.out.println("User tried to cheat");
+                    bol =getChanceFirstRound(count2);
+                    if(bol){
+                        sum = input;
+                        System.out.println("User successfully cheated");
+                    }else {
+                        userSum-=10;
+                        System.out.println("User lost 10 points");
+                    }
+                }
+
+
+
+                System.out.println("User rolls the dices...");
+
                 dicesM.rollTheDice(dices1);
                 dicesM.rollTheDice(dices2);
 
-                int sum = dices1 + dices2;
+//                int sum = dices1 + dices2;
                 userDice.add(sum);
                 System.out.println("On the dice fell " + sum + " points.");
                 System.out.print("Result is: ");
@@ -102,6 +126,15 @@ public class GameDice {
         int userFinalScore = totalPoints(userResult)-userSum;
         int compFinalScore = totalPoints(computerResult)-compSum;
         printFinalResult();
+        System.out.println("-------Lost points during cheating ------\n"+
+                "User: "+ userSum+'\n'+
+                "Computer: "+ compSum);
+        if (userFinalScore > compFinalScore) {
+            System.out.println("User win " + userFinalScore + " points more. Congratulations!");
+        } else {
+            System.out.println("Computer win " + compFinalScore + " points more. Congratulations!");
+        }
+
 
     }
 
@@ -121,7 +154,8 @@ public class GameDice {
                 "  -3-  | Dice: "+userDice.get(2)+"     | Dice: "+computerDice.get(2)+'\n'+
                 "       | Result: "+userResult.get(2)+"  | Result: "+computerResult.get(2)+'\n'+
                 "-------+-----------+-----------------\n"+
-                "       |   Points: " + totalPoints(userResult)+ " |  Points: " +totalPoints(computerResult));
+                "       | Final points: "+ totalPoints(userResult)+ "| Final Result: " + totalPoints(computerResult));
+
 
         if(totalPoints(userResult) > totalPoints(computerResult)){
             System.out.println("User wins "+(totalPoints(userResult)-totalPoints(computerResult))+" points more. Congratulations!");
@@ -154,5 +188,11 @@ public class GameDice {
             sum = sum + point.get(i);
         }
         return sum;
+    }
+    public static boolean getChanceFirstRound(int count){
+        int n = rand.nextInt(1,count);
+        int n1 = rand.nextInt(1,count);
+        System.out.println("First number: "+n+ " Second number: "+ n1);
+        return n==n1;
     }
 }
